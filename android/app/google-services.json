@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "767976103345",
+    "project_id": "pettinder-fcfaa",
+    "storage_bucket": "pettinder-fcfaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767976103345:android:5d0cc3635837cc0d52b190",
+        "android_client_info": {
+          "package_name": "com.example.pet_tinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767976103345-5r119n9a2guijjmb8mt5qifekltvfdr9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_30KKkiDaOdNbHGy0qhXCgZlSXhnXUb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767976103345-5r119n9a2guijjmb8mt5qifekltvfdr9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
