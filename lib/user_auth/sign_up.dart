@@ -79,6 +79,7 @@ class _SignUpState extends State<SignUp> {
           },
           decoration: CustomInputDecoration.customInputDecoration("Şifre"),
           cursorColor: Colors.black,
+          obscureText: true,
         ),
       );
   Widget textFormFieldPasswordAgain() => Padding(
@@ -97,6 +98,7 @@ class _SignUpState extends State<SignUp> {
           decoration:
               CustomInputDecoration.customInputDecoration("Şifre (Tekrar)"),
           cursorColor: Colors.black,
+          obscureText: true,
         ),
       );
   CustomTextButton signUpButton() {
@@ -111,6 +113,7 @@ class _SignUpState extends State<SignUp> {
                   await firebaseAuth.createUserWithEmailAndPassword(
                       email: email, password: password);
               customSnackBar();
+              Navigator.pushNamed(context, "/loginPage");
               //_userListenController.userEmail.value = email;
               //Get.toNamed("/userAdressPage");
             } on FirebaseAuthException catch (e) {

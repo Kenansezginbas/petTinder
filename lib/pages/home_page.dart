@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
@@ -20,8 +21,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final postRef = FirebaseFirestore.instance.collection("Posts");
   final fireaseAuth = FirebaseAuth.instance;
+  final storage = FirebaseStorage.instance;
   var userEmail;
   var listUser;
+  var img;
+  //var resultimg = FirebaseStorage.instance.ref().child(_img).getDownloadURL();
 
   @override
   void initState() {
@@ -36,6 +40,13 @@ class _HomePageState extends State<HomePage> {
         listUser = user;
       }
     });
+    getimg();
+  }
+
+  getimg() async {
+    final _img = "profileImage/kenansezginbas@hotmail.com" + ".png";
+    img = await storage.ref().child(_img).getDownloadURL();
+    print("URL" + img);
   }
 
   @override
@@ -90,8 +101,14 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(20),
                     child: SizedBox.fromSize(
                       size: Size.fromRadius(48), // Image radius
-                      child:
-                          Image.network(listUser.photoURL, fit: BoxFit.cover),
+                      child: img == null
+                          ? FlutterLogo()
+                          : Image(
+                              image: NetworkImage(FirebaseStorage.instance
+                                  .ref()
+                                  .child("profileImage/" + user + "@gmail.com.png")
+                                  .getDownloadURL()
+                                  .toString())),
                     ),
                   ),
                 ),

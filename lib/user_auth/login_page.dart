@@ -18,8 +18,16 @@ class _LoginPageState extends State<LoginPage> {
   var email, password;
   final formKey = GlobalKey<FormState>();
   var title = "Giriş Yap";
-  // FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final UserController userController = Get.put(UserController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
         child: TextFormField(
           validator: (val) {
             if (val!.isEmpty) {
-              return "Lütfen Alanları Doldurunuz"; 
+              return "Lütfen Alanları Doldurunuz";
             } else {
               return null;
             }
@@ -81,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
           },
           decoration: CustomInputDecoration.customInputDecoration("Şifre"),
           cursorColor: Colors.black,
+          obscureText: true,
         ),
       );
   CustomTextButton loginButton() {

@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         appBarTheme:
             AppBarTheme(backgroundColor: CustomColors.bottomNavBarColor),
       ),
-      home: WidgetTest(),
+      home: HomePage(),
     );
   }
 }
