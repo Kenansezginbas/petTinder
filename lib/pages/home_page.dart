@@ -40,14 +40,14 @@ class _HomePageState extends State<HomePage> {
         listUser = user;
       }
     });
-    getimg();
+    // getimg();
   }
 
-  getimg() async {
-    final _img = "profileImage/kenansezginbas@hotmail.com" + ".png";
-    img = await storage.ref().child(_img).getDownloadURL();
-    print("URL" + img);
-  }
+  // getimg() async {
+  //   final _img = "profileImage/kenansezginbas@hotmail.com" + ".png";
+  //   img = await storage.ref().child(_img).getDownloadURL();
+  //   print("URL" + img);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,8 @@ class _HomePageState extends State<HomePage> {
                           : Image(
                               image: NetworkImage(FirebaseStorage.instance
                                   .ref()
-                                  .child("profileImage/" + user + "@gmail.com.png")
+                                  .child(
+                                      "profileImage/" + user + "@gmail.com.png")
                                   .getDownloadURL()
                                   .toString())),
                     ),

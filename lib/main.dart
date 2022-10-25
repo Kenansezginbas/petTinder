@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,9 +15,18 @@ import 'package:pet_tinder/user_auth/user_profile.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/widget_test.dart';
 
+import 'firebase_options.dart';
+// Import the generated file
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  if (Platform.isIOS) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(MyApp());
 }
 
@@ -26,7 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pet Tinder',
       routes: {
         "/loginPage": (context) => LoginPage(),
         "/signUp": (context) => SignUp(),

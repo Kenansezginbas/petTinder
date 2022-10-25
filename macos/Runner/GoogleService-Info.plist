@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>767976103345-7jjbhel617kbvoo1r536u6okrs6or2g4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.767976103345-7jjbhel617kbvoo1r536u6okrs6or2g4</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBcdXa7hqHdo0Gbd9gmvkftMtpQL0UH0A0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>767976103345</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.petTinder</string>
+	<key>PROJECT_ID</key>
+	<string>pettinder-fcfaa</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pettinder-fcfaa.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:767976103345:ios:42baa71dcb9c7e5352b190</string>
+</dict>
+</plist>

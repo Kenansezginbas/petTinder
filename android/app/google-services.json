@@ -29,6 +29,13 @@
             {
               "client_id": "767976103345-5r119n9a2guijjmb8mt5qifekltvfdr9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "767976103345-7jjbhel617kbvoo1r536u6okrs6or2g4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.petTinder"
+              }
             }
           ]
         }
