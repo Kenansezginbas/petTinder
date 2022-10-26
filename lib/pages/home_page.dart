@@ -121,10 +121,15 @@ class _HomePageState extends State<HomePage> {
                   style: CustomTextStyle.postUserTextStyle,
                 ),
                 Spacer(),
-                IconButton(
-                  onPressed: () {},
+                PopupMenuButton(
                   icon: Icon(Icons.more_vert),
-                )
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: Text("Şikayet Et"),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

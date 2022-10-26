@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         appBarTheme:
             AppBarTheme(backgroundColor: CustomColors.bottomNavBarColor),
       ),
-      home: HomePage(),
+      home: WidgetTest(),
     );
   }
 }

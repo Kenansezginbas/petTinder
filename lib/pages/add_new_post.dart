@@ -32,11 +32,12 @@ class _AddNewPostState extends State<AddNewPost> {
   bool isLoading = false;
   final _firebaseFirestore = FirebaseFirestore.instance.collection("Posts");
   final _cloudStroage = FirebaseStorage.instance;
+  final _formKey = GlobalKey<FormState>();
   var uuid = Uuid();
   late var id;
-  final _formKey = GlobalKey<FormState>();
   var _firebaseAuth = FirebaseAuth.instance;
   var userEmail;
+  var now = DateTime.now();
   Future pickImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -85,63 +86,62 @@ class _AddNewPostState extends State<AddNewPost> {
     );
   }
 
-  postImage() => Column(
-        children: [
-          Container(
-            child: image == null
-                ? Container(
-                    height: MediaQuery.of(context).size.height * .35,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(ImageUrls.loginPageLogoUrl),
-                      ),
+  postImage() => Column(children: [
+        Container(
+          child: image == null
+              ? Container(
+                  height: MediaQuery.of(context).size.height * .35,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(ImageUrls.loginPageLogoUrl),
                     ),
-                    child: Center(
-                      child: Text("Lütfen Foto Yükleyiniz",
-                          style: CustomTextStyle.headline4),
+                  ),
+                  child: Center(
+                    child: Text("Lütfen Foto Yükleyiniz",
+                        style: CustomTextStyle.headline4),
+                  ),
+                )
+              : Column(
+                  children: [
+                    Image(
+                      height: MediaQuery.of(context).size.height * .35,
+                      width: MediaQuery.of(context).size.width,
+                      image: FileImage(image!),
+                      fit: BoxFit.cover,
                     ),
-                  )
-                : Column(
-                    children: [
-                      Image(
-                        height: MediaQuery.of(context).size.height * .35,
-                        width: MediaQuery.of(context).size.width,
-                        image: FileImage(image!),
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: 20),
-                      Form(
-                        key: _formKey,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            maxLines: 3,
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return "Lütfen Alanları Doldurunuz";
-                              } else {
-                                return null;
-                              }
-                            },
-                            onSaved: (val) {
-                              postDesc = val!;
-                            },
-                            decoration: CustomInputDecoration
-                                .customInputDecorationDialog("Açıklama"),
-                            cursorColor: Colors.black,
-                          ),
+                    SizedBox(height: 20),
+                    Form(
+                      key: _formKey,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          maxLines: 3,
+                          validator: (val) {
+                            if (val!.isEmpty) {
+                              return "Lütfen Alanları Doldurunuz";
+                            } else {
+                              return null;
+                            }
+                          },
+                          onSaved: (val) {
+                            postDesc = val!;
+                          },
+                          decoration:
+                              CustomInputDecoration.customInputDecorationDialog(
+                                  "Açıklama"),
+                          cursorColor: Colors.black,
                         ),
                       ),
-                      CustomElevatedButton(
-                        buttonText: "Paylaş",
-                        onPressed: saveImage,
-                      ),
-                    ],
-                  ),
-          ),
-        ],
-      );
+                    ),
+                    CustomElevatedButton(
+                      buttonText: "Paylaş",
+                      onPressed: saveImage,
+                    ),
+                  ],
+                ),
+        ),
+      ]);
 
   savePost(imageURL) async {
     try {
@@ -149,6 +149,8 @@ class _AddNewPostState extends State<AddNewPost> {
         "ImageURL": imageURL,
         "PostDesc": postDesc,
         "User": userEmail,
+        "PostID": uuid.v1(),
+        "PostDate": now.toString()
       });
       cleanData();
       showSnackBar("Gönderi Paylaşıldı");
