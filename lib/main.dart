@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:pet_tinder/pages/add_new_post.dart';
 import 'package:pet_tinder/pages/blog_page.dart';
 import 'package:pet_tinder/pages/home_page.dart';
+import 'package:pet_tinder/pages/post_report_page.dart';
 import 'package:pet_tinder/pages/shopping_page.dart';
 import 'package:pet_tinder/user_auth/forgot_password_page.dart';
 import 'package:pet_tinder/user_auth/initial_page.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         "/addNewPost": (context) => AddNewPost(),
         "/userProfile": (context) => UserProfile(),
         "/blogPage": (context) => BlogPage(),
+        "/postReportPage": (context) => PostReportPage(),
         "/widgetTest": (context) => WidgetTest()
       },
       theme: ThemeData(

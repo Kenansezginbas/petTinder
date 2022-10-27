@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:pet_tinder/models/post_model.dart';
+import 'package:pet_tinder/pages/post_report_page.dart';
 import 'package:pet_tinder/user_auth/user_control.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
@@ -69,13 +70,13 @@ class _HomePageState extends State<HomePage> {
             itemCount: data.size,
             itemBuilder: (context, index) {
               return postItem(
-                data.docs[index]["PostDesc"],
-                data.docs[index]["ImageURL"],
-                data.docs[index]["User"].substring(
-                  0,
-                  data.docs[index]["User"].indexOf("@"),
-                ),
-              );
+                  data.docs[index]["PostDesc"],
+                  data.docs[index]["ImageURL"],
+                  data.docs[index]["User"].substring(
+                    0,
+                    data.docs[index]["User"].indexOf("@"),
+                  ),
+                  data.docs[index]["PostID"]);
             },
           );
         },
@@ -83,7 +84,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget postItem(String postDesc, String imageURL, String user) => Column(
+  Widget postItem(
+          String postDesc, String imageURL, String user, String postID) =>
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -121,15 +124,18 @@ class _HomePageState extends State<HomePage> {
                   style: CustomTextStyle.postUserTextStyle,
                 ),
                 Spacer(),
-                PopupMenuButton(
-                  icon: Icon(Icons.more_vert),
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      onTap: () {},
-                      child: Text("Şikayet Et"),
-                    ),
-                  ],
-                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PostReportPage(
+                            postID: postID,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.report))
               ],
             ),
           ),

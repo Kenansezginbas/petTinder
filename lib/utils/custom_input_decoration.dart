@@ -45,6 +45,10 @@ class CustomInputDecoration {
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: Colors.red),
         ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.grey, width: 1),
+        ),
       );
   static customInputDecorationTextFieldPayment(String label) => InputDecoration(
         label: Text(label),
