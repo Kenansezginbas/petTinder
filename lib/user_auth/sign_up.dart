@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_tinder/database/database_helper.dart';
 import 'package:pet_tinder/utils/custom_input_decoration.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/widgets/custom_text_button.dart';
@@ -19,6 +20,7 @@ class _SignUpState extends State<SignUp> {
   final firebaseAuth = FirebaseAuth.instance;
   var title = "Üye Ol";
   // FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  var databaseHelper = DatabaseHelper.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +64,7 @@ class _SignUpState extends State<SignUp> {
           },
           decoration: CustomInputDecoration.customInputDecoration("Email"),
           cursorColor: Colors.black,
+          keyboardType: TextInputType.emailAddress,
         ),
       );
   Widget textFormFieldPassword() => Padding(
@@ -113,7 +116,12 @@ class _SignUpState extends State<SignUp> {
                   await firebaseAuth.createUserWithEmailAndPassword(
                       email: email, password: password);
               customSnackBar();
-              Navigator.pushNamed(context, "/loginPage");
+              try {
+                var databaseResult = await databaseHelper
+                    .insert({"email": email, "password": password});
+                print("database result" + databaseResult.toString());
+              } catch (e) {}
+              Navigator.pushNamed(context, "/widgetTest");
               //_userListenController.userEmail.value = email;
               //Get.toNamed("/userAdressPage");
             } on FirebaseAuthException catch (e) {

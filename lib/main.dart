@@ -11,6 +11,7 @@ import 'package:pet_tinder/pages/shopping_page.dart';
 import 'package:pet_tinder/user_auth/forgot_password_page.dart';
 import 'package:pet_tinder/user_auth/initial_page.dart';
 import 'package:pet_tinder/user_auth/login_page.dart';
+import 'package:pet_tinder/user_auth/main_page.dart';
 import 'package:pet_tinder/user_auth/sign_up.dart';
 import 'package:pet_tinder/user_auth/user_profile.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Pet Tinder',
       routes: {
         "/loginPage": (context) => LoginPage(),
@@ -47,6 +49,7 @@ class MyApp extends StatelessWidget {
         "/userProfile": (context) => UserProfile(),
         "/blogPage": (context) => BlogPage(),
         "/postReportPage": (context) => PostReportPage(),
+        "/initialPage": (context) => InitialPage(),
         "/widgetTest": (context) => WidgetTest()
       },
       theme: ThemeData(
@@ -55,7 +58,7 @@ class MyApp extends StatelessWidget {
         appBarTheme:
             AppBarTheme(backgroundColor: CustomColors.bottomNavBarColor),
       ),
-      home: WidgetTest(),
+      home: MainPage(),
     );
   }
 }

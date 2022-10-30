@@ -6,6 +6,8 @@ class CustomTextStyle {
       GoogleFonts.nunito(color: Colors.black, fontSize: 20);
   static TextStyle headline4 =
       GoogleFonts.nunito(color: Colors.black, fontSize: 30);
+  static TextStyle headline3 = GoogleFonts.nunito(
+      color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold);
 
   static TextStyle buttonWhiteTextStyle =
       GoogleFonts.nunito(color: Colors.white, fontSize: 15);

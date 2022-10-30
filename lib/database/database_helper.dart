@@ -12,7 +12,6 @@ class DatabaseHelper {
   static final columnId = '_id';
   static final columnEmail = 'email';
   static final columnPassword = 'password';
-  
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -25,6 +24,11 @@ class DatabaseHelper {
     // lazily instantiate the db the first time it is accessed
     _database = await _initDatabase();
     return _database!;
+  }
+
+  Future<void> query() async {
+    List<Map> list = await _database!.rawQuery('SELECT * FROM users');
+    print(list);
   }
 
   // this opens the database (and creates it if it doesn't exist)

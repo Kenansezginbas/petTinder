@@ -25,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 
   @override
@@ -98,23 +97,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () async {
         if (formKey.currentState!.validate()) {
           formKey.currentState!.save();
-          try {
-            final credential = await FirebaseAuth.instance
-                .signInWithEmailAndPassword(email: email, password: password);
-            userController.user.value = email;
-            debugPrint("Giriş Başarılı");
-            debugPrint(userController.user.value);
-            //_userListenController.userEmail.value = email;
-            Get.offNamed("/widgetTest");
-          } on FirebaseAuthException catch (e) {
-            if (e.code == 'user-not-found') {
-              print('No user found for that email.');
-              customShowDialog("Kullanıcı Bulunamadı");
-            } else if (e.code == 'wrong-password') {
-              print('Wrong password provided for that user.');
-              customShowDialog("Hatalı Mail veya Şifre Bilgisi");
-            }
-          }
+          firebaseLogin();
           debugPrint(email);
         } else {}
       },
@@ -133,6 +116,26 @@ class _LoginPageState extends State<LoginPage> {
       buttonText: "Kayıt Ol",
       onPressed: () => Navigator.pushNamed(context, "/signUp"),
     );
+  }
+
+  firebaseLogin() async {
+    try {
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      userController.user.value = email;
+      debugPrint("Giriş Başarılı");
+      debugPrint(userController.user.value);
+      //_userListenController.userEmail.value = email;
+      Get.offNamed("/widgetTest");
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        customShowDialog("Kullanıcı Bulunamadı");
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+        customShowDialog("Hatalı Mail veya Şifre Bilgisi");
+      }
+    }
   }
 
   Future customShowDialog(String errorMessage) {

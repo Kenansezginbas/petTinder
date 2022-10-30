@@ -20,7 +20,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final postRef = FirebaseFirestore.instance.collection("Posts");
+  final postRef =
+      FirebaseFirestore.instance.collection("Posts").orderBy("PostDate");
   final fireaseAuth = FirebaseAuth.instance;
   final storage = FirebaseStorage.instance;
   var userEmail;

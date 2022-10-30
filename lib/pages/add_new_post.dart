@@ -38,16 +38,6 @@ class _AddNewPostState extends State<AddNewPost> {
   var _firebaseAuth = FirebaseAuth.instance;
   var userEmail;
   var now = DateTime.now();
-  Future pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final imageTemp = File(image.path);
-      setState(() => this.image = imageTemp);
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
-  }
 
   @override
   void initState() {
@@ -70,10 +60,10 @@ class _AddNewPostState extends State<AddNewPost> {
       appBar: CustomAppBar(
         title: "Yeni Gönderi",
         actions: [
-          IconButton(
-            onPressed: pickImage,
-            icon: Icon(Icons.camera_alt),
-          )
+          // IconButton(
+          //   onPressed: pickImage,
+          //   icon: Icon(Icons.camera_alt),
+          // )
         ],
       ),
       body: isLoading ? showProgress() : postImage(),
@@ -98,8 +88,20 @@ class _AddNewPostState extends State<AddNewPost> {
                     ),
                   ),
                   child: Center(
-                    child: Text("Lütfen Foto Yükleyiniz",
-                        style: CustomTextStyle.headline4),
+                    child: GestureDetector(
+                      onTap: pickImage,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Lütfen Foto Yükleyiniz",
+                              style: CustomTextStyle.headline3),
+                          Icon(
+                            Icons.camera_alt,
+                            size: 40,
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 )
               : Column(
@@ -142,6 +144,17 @@ class _AddNewPostState extends State<AddNewPost> {
                 ),
         ),
       ]);
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this.image = imageTemp);
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
 
   savePost(imageURL) async {
     try {

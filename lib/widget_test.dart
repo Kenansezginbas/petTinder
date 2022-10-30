@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet_tinder/pages/blog_page.dart';
 import 'package:pet_tinder/pages/home_page.dart';
 import 'package:pet_tinder/pages/shopping_page.dart';
 import 'package:pet_tinder/user_auth/user_profile.dart';
@@ -81,7 +82,7 @@ class _WidgetTestState extends State<WidgetTest> {
         controller: _pageController,
         children: [
           HomePage(),
-          HomePage(),
+          BlogPage(),
           ShoppingPage(),
           UserProfile(),
         ],
@@ -124,7 +125,7 @@ class _WidgetTestState extends State<WidgetTest> {
       height: MediaQuery.of(context).size.height * .10,
       icons: [
         CupertinoIcons.home,
-        CupertinoIcons.chat_bubble_2,
+        CupertinoIcons.eyeglasses,
         Icons.shopping_cart,
         CupertinoIcons.person
       ],
