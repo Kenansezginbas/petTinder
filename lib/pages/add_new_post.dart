@@ -163,7 +163,8 @@ class _AddNewPostState extends State<AddNewPost> {
         "PostDesc": postDesc,
         "User": userEmail,
         "PostID": uuid.v1(),
-        "PostDate": now.toString()
+        "PostDate": now.toString(),
+        "Like": []
       });
       cleanData();
       showSnackBar("Gönderi Paylaşıldı");

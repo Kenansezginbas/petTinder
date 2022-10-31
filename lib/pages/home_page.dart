@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:like_button/like_button.dart';
 import 'package:pet_tinder/models/post_model.dart';
 import 'package:pet_tinder/pages/post_report_page.dart';
 import 'package:pet_tinder/user_auth/user_control.dart';
@@ -20,8 +21,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late bool like;
   final postRef =
       FirebaseFirestore.instance.collection("Posts").orderBy("PostDate");
+  final _firebaseFirestore = FirebaseFirestore.instance.collection("Posts");
+
   final fireaseAuth = FirebaseAuth.instance;
   final storage = FirebaseStorage.instance;
   var userEmail;
@@ -70,14 +74,30 @@ class _HomePageState extends State<HomePage> {
           return ListView.builder(
             itemCount: data.size,
             itemBuilder: (context, index) {
+              print("data" + data.docs[index].reference.id.toString());
+              List likeList = data.docs[index]["Like"];
+              print(likeList);
+              // print("list ${likeList[index]}");
+              if (likeList.contains(userEmail)) {
+                print(likeList.contains(userEmail));
+                print("Like");
+              } else {
+                print("No Like");
+              }
               return postItem(
-                  data.docs[index]["PostDesc"],
-                  data.docs[index]["ImageURL"],
-                  data.docs[index]["User"].substring(
-                    0,
-                    data.docs[index]["User"].indexOf("@"),
-                  ),
-                  data.docs[index]["PostID"]);
+                data.docs[index]["PostDesc"],
+                data.docs[index]["ImageURL"],
+                data.docs[index]["User"].substring(
+                  0,
+                  data.docs[index]["User"].indexOf("@"),
+                ),
+                data.docs[index]["PostID"],
+                data.docs[index].reference.id,
+                likeList.contains(userEmail) == true
+                    ? Icon(Icons.favorite_rounded, color: Colors.red)
+                    : Icon(Icons.favorite_rounded, color: Colors.black),
+                likeList.contains(userEmail),
+              );
             },
           );
         },
@@ -85,8 +105,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget postItem(
-          String postDesc, String imageURL, String user, String postID) =>
+  Widget postItem(String postDesc, String imageURL, String user, String postID,
+          doc, Icon icon, bool isLiked) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,9 +137,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                SizedBox(),
                 Text(
                   user,
                   style: CustomTextStyle.postUserTextStyle,
@@ -153,7 +171,32 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(left: 10, bottom: 4),
             child: Row(
               children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
+                LikeButton(
+                  circleColor: CircleColor(
+                      start: Color(0xff00ddff), end: Color(0xff0099cc)),
+                  bubblesColor: BubblesColor(
+                    dotPrimaryColor: Color(0xff33b5e5),
+                    dotSecondaryColor: Color(0xff0099cc),
+                  ),
+                  likeBuilder: (bool isLiked) {
+                    like = isLiked;
+                    print("Like Status : $isLiked");
+                    likeAction(doc, isLiked);
+                    return Icon(
+                      Icons.favorite,
+                      color: isLiked ? Colors.red : Colors.black,
+                    );
+                  },
+                  isLiked: isLiked,
+                  onTap: onLikeButtonTapped,
+                ),
+                IconButton(
+                    onPressed: () async {
+                      setState(() {
+                        likeAction(doc, isLiked);
+                      });
+                    },
+                    icon: icon),
                 IconButton(
                     onPressed: () {}, icon: Icon(CupertinoIcons.chat_bubble)),
                 Spacer(),
@@ -182,4 +225,30 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       );
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    print("sjfhjshfsf");
+
+    return !isLiked;
+  }
+
+  likeAction(doc, bool isLiked) {
+    print("Like Action Calisti");
+    _firebaseFirestore.doc(doc).update({
+      "Like": FieldValue.arrayUnion([userEmail])
+    }).then((value) {
+      print("kjhgjsdkhgfdg");
+    });
+    print("Like Action Bitti");
+
+    // if (isLiked == false) {
+    //   _firebaseFirestore.doc(doc).update({
+    //     "Like": FieldValue.arrayUnion([userEmail])
+    //   });
+    // } else {
+    //   //  _firebaseFirestore.doc(doc).set({
+    //   //     "Like": FieldValue.delete([userEmail])
+    //   //   });
+    // }
+  }
 }
