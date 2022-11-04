@@ -1,27 +1,44 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_tinder/service/firebase_methods.dart';
+import 'package:pet_tinder/utils/custom_func.dart';
 import 'package:pet_tinder/utils/custom_input_decoration.dart';
 import 'package:pet_tinder/widgets/custom_elevated_button.dart';
 import 'package:pet_tinder/widgets/custom_app_bar.dart';
 
-class PostReportPage extends StatefulWidget {
-  final postID;
-  const PostReportPage({super.key, this.postID});
+class ContactUS extends StatefulWidget {
+  const ContactUS({super.key});
 
   @override
-  State<PostReportPage> createState() => _PostReportPageState();
+  State<ContactUS> createState() => _ContactUSState();
 }
 
-class _PostReportPageState extends State<PostReportPage> {
+class _ContactUSState extends State<ContactUS> {
+  var firebaseMethods = FirebaseMethods();
+  var customFuncs = CustomFuncs();
   final formKey = GlobalKey<FormState>();
+  User? listenUser;
 
-  var reasonForComplaint;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in! ${user.email}');
+        listenUser = user;
+      }
+    });
+  }
+
+  var message;
   @override
   Widget build(BuildContext context) {
-    print("post id $widget.postID");
     return Scaffold(
-      appBar: CustomAppBar(title: "Şikayet Et", actions: []),
+      appBar: CustomAppBar(title: "Bize Ulaşın", actions: []),
       body: Column(
         children: [
           Form(
@@ -40,34 +57,30 @@ class _PostReportPageState extends State<PostReportPage> {
                   }
                 },
                 onSaved: (val) {
-                  reasonForComplaint = val!;
+                  message = val!;
                 },
                 decoration: CustomInputDecoration.customInputDecorationDialog(
-                    "Şikayet Sebebini Yazınız"),
+                    "Mesajınızı Yazınız"),
                 cursorColor: Colors.black,
               ),
             ),
           ),
           CustomElevatedButton(
-            buttonText: "Şikayet Et",
-            onPressed: postReport,
+            buttonText: "Mesajı Gönder",
+            onPressed: postContacts,
           )
         ],
       ),
     );
   }
 
-  void postReport() {
+  void postContacts() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      FirebaseMethods().savePostReport(
-          postID: widget.postID, resultData: "", whoIsSendReport: "kenan");
-      formKey.currentState!..reset();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Şikayetiniz Alındı"),
-        ),
-      );
+      firebaseMethods.saveContacts(
+          message: message, email: listenUser!.email, resultData: "");
+      customFuncs.showSnackBar(context: context, message: message);
+      formKey.currentState!.reset();
     }
   }
 }

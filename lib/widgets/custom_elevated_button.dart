@@ -14,11 +14,11 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       child: Text(
         buttonText,
-        style: CustomTextStyle.titleTextStyle,
+        style: CustomTextStyle.buttonBlackTextStyle,
       ),
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: CustomColors.colorCardColor,
+        backgroundColor: Color(0xffFEDE69),
       ),
     );
   }

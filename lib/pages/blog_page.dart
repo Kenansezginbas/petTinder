@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:pet_tinder/models/post_model.dart';
+import 'package:pet_tinder/pages/blog_page_detail.dart';
 import 'package:pet_tinder/user_auth/user_control.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
@@ -58,8 +59,11 @@ class _BlogPageState extends State<BlogPage> {
           return GridView.builder(
             itemCount: 2,
             itemBuilder: (context, index) {
-              return blogItem(data.docs[index]["BlogTitle"],
-                  data.docs[index]["BlogTitle"], data.docs[index]["ImageURL"]);
+              return blogItem(
+                  data.docs[index]["BlogTitle"],
+                  data.docs[index]["BlogTitle"],
+                  data.docs[index]["ImageURL"],
+                  data.docs[index]["URL"]);
             },
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, childAspectRatio: .7),
@@ -69,28 +73,41 @@ class _BlogPageState extends State<BlogPage> {
     );
   }
 
-  Widget blogItem(String title, String user, String imageURL) => Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Text(
-                maxLines: 2,
-                title,
-                overflow: TextOverflow.ellipsis,
-                style: CustomTextStyle.titleTextStyle,
+  Widget blogItem(String title, String user, String imageURL, String url) =>
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BlogPageDetail(
+                url: url,
               ),
             ),
-            ClipRRect(
-              child: Image(
-                height: MediaQuery.of(context).size.height * .20,
-                width: MediaQuery.of(context).size.width * .40,
-                image: NetworkImage(imageURL),
-                fit: BoxFit.cover,
+          );
+        },
+        child: Container(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  maxLines: 2,
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  style: CustomTextStyle.titleTextStyle,
+                ),
               ),
-              borderRadius: BorderRadius.circular(10),
-            )
-          ],
+              ClipRRect(
+                child: Image(
+                  height: MediaQuery.of(context).size.height * .20,
+                  width: MediaQuery.of(context).size.width * .40,
+                  image: NetworkImage(imageURL),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              )
+            ],
+          ),
         ),
       );
 }

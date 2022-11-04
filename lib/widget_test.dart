@@ -11,6 +11,8 @@ import 'package:pet_tinder/utils/custom_texts.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
+import 'package:pet_tinder/widgets/custom_drawer.dart';
+import 'package:pet_tinder/widgets/custom_fab.dart';
 import 'package:pet_tinder/widgets/custom_logo_container.dart';
 import 'package:pet_tinder/widgets/custom_icon_button.dart';
 import 'package:pet_tinder/widgets/custom_text_button.dart';
@@ -50,34 +52,7 @@ class _WidgetTestState extends State<WidgetTest> {
         title: Text(appBarText, style: CustomTextStyle.appBarTextStyle),
         centerTitle: true,
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                color: Colors.red,
-                child: Image.network(
-                  ImageUrls.loginPageLogoBckUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            CustomTextButton(
-              buttonText: "Blog",
-              onPressed: () => Get.offNamed("/blogPage"),
-            ),
-            CustomTextButton(
-              buttonText: "Hakkımızda",
-              onPressed: () {},
-            ),
-            CustomTextButton(
-              buttonText: "Bize Ulaşın",
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(),
       body: PageView(
         controller: _pageController,
         children: [
@@ -87,21 +62,9 @@ class _WidgetTestState extends State<WidgetTest> {
           UserProfile(),
         ],
       ),
-      floatingActionButton: _customfloatActionButton(context),
+      floatingActionButton: const CustomFAB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _customBottomNavBar(context),
-    );
-  }
-
-  FloatingActionButton _customfloatActionButton(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: (() => Navigator.pushNamed(context, "/addNewPost")),
-      child: Icon(
-        CupertinoIcons.add,
-        color: CustomColors.bottomNavBarColor,
-        size: 30,
-      ),
-      backgroundColor: CustomColors.typeCardColor,
     );
   }
 

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/widgets/custom_text_button.dart';
 
-class CustomFunc {
-  final errorMessage, context;
-  CustomFunc({ required this.errorMessage,required this.context});
-  Future customErrorShowDialog(String errorMessage) {
+class CustomFuncs {
+  Future customErrorShowDialog(String errorMessage, BuildContext context) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -28,6 +26,17 @@ class CustomFunc {
           ],
         );
       },
+    );
+  }
+
+  showSnackBar({
+    required context,
+    required message,
+  }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
     );
   }
 }

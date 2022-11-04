@@ -8,7 +8,10 @@ class CustomTextStyle {
       GoogleFonts.nunito(color: Colors.black, fontSize: 30);
   static TextStyle headline3 = GoogleFonts.nunito(
       color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold);
-
+  static TextStyle buttonBlackTextStyle = GoogleFonts.nunito(
+      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold);
+  static TextStyle authTitleTextStyle = GoogleFonts.nunito(
+      color: Colors.black, fontSize: 34, fontWeight: FontWeight.bold);
   static TextStyle buttonWhiteTextStyle =
       GoogleFonts.nunito(color: Colors.white, fontSize: 15);
   static TextStyle appBarTextStyle =

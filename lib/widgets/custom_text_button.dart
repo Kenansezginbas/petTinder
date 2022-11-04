@@ -13,7 +13,7 @@ class CustomTextButton extends StatelessWidget {
     return TextButton(
       child: Text(
         buttonText,
-        style: CustomTextStyle.titleTextStyle, 
+        style: CustomTextStyle.buttonBlackTextStyle,
       ),
       onPressed: onPressed,
     );

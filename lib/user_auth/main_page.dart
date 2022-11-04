@@ -18,7 +18,6 @@ class _MainPageState extends State<MainPage> {
     print(result[0]["email"]);
     email = result[0]["email"];
     password = result[0]["password"];
-
     firebaseLogin();
   }
 

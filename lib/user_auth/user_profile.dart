@@ -7,6 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_tinder/state_management/user_contoller.dart';
+import 'package:pet_tinder/utils/custom_colors.dart';
+import 'package:pet_tinder/utils/custom_text_styles.dart';
+import 'package:pet_tinder/utils/image_urls.dart';
 import 'package:pet_tinder/widgets/custom_text_widget.dart';
 
 class UserProfile extends StatefulWidget {
@@ -77,10 +80,76 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Center(
-        child:Text("f")
-      ),
+        body: Column(
+      children: [
+        Container(
+          child: profilePic(),
+          height: height * .35,
+          width: width,
+          decoration: BoxDecoration(
+            color: CustomColors.customOrangeColor,
+            borderRadius: BorderRadiusDirectional.vertical(
+              bottom: Radius.circular(60),
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () async {
+            var signOut = await fireaseAuth.signOut();
+            Navigator.pushNamed(context, "/initialPage");
+          },
+          child: Text(
+            "Logout",
+            style: CustomTextStyle.buttonBlackTextStyle,
+          ),
+        ),
+      ],
+    ));
+  }
+
+  Stack profilePic() {
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: SizedBox(
+            child: CircleAvatar(
+              radius: 40.0,
+              backgroundColor: Colors.transparent,
+              foregroundColor: CustomColors.turquoiseColor,
+              child: CircleAvatar(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 12.0,
+                    child: Icon(
+                      Icons.camera_alt,
+                      size: 15.0,
+                      color: CustomColors.blackIconColor,
+                    ),
+                  ),
+                ),
+                radius: 38.0,
+                backgroundImage: NetworkImage(
+                  ImageUrls.loginPageLogoUrl,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
+
+// TextButton(
+//           onPressed: () async {
+//             var signOut = await fireaseAuth.signOut();
+//             Navigator.pushNamed(context, "/initialPage");
+//           },
+//           child: Text("Logout"),
+//         ),

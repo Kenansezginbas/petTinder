@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_tinder/database/database_helper.dart';
 import 'package:pet_tinder/utils/custom_input_decoration.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
+import 'package:pet_tinder/widgets/custom_elevated_button.dart';
 import 'package:pet_tinder/widgets/custom_text_button.dart';
 import 'package:pet_tinder/widgets/custom_text_widget.dart';
 import 'package:get/get.dart';
@@ -26,87 +27,89 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Center(
-        child: Form(
-          key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontSize: 30),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              textFormFieldEmail(),
-              textFormFieldPassword(),
-              textFormFieldPasswordAgain(),
-              signUpButton(),
-            ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  title,
+                  style: CustomTextStyle.authTitleTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                textFormFieldEmail(),
+                SizedBox(height: 20),
+                textFormFieldPassword(),
+                SizedBox(height: 20),
+                textFormFieldPasswordAgain(),
+                SizedBox(height: 20),
+                signUpButton(),
+                SizedBox(height: 10),
+                CustomTextButton(
+                  buttonText: "Giriş Ekranına Dön",
+                  onPressed: () => Get.offNamed("/loginPage"),
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget textFormFieldEmail() => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextFormField(
-          validator: (val) {
-            if (val!.isEmpty) {
-              return "Lütfen Alanları Doldurunuz";
-            } else {
-              return null;
-            }
-          },
-          onSaved: (val) {
-            email = val!.trim();
-          },
-          decoration: CustomInputDecoration.customInputDecoration("Email"),
-          cursorColor: Colors.black,
-          keyboardType: TextInputType.emailAddress,
-        ),
+  Widget textFormFieldEmail() => TextFormField(
+        validator: (val) {
+          if (val!.isEmpty) {
+            return "Lütfen Alanları Doldurunuz";
+          } else {
+            return null;
+          }
+        },
+        onSaved: (val) {
+          email = val!.trim();
+        },
+        decoration: CustomInputDecoration.customInputDecoration("Email"),
+        cursorColor: Colors.black,
+        keyboardType: TextInputType.emailAddress,
       );
-  Widget textFormFieldPassword() => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextFormField(
-          validator: (val) {
-            if (val!.isEmpty) {
-              return "Lütfen Alanları Doldurunuz";
-            } else {
-              return null;
-            }
-          },
-          onSaved: (val) {
-            password = val!.trim();
-          },
-          decoration: CustomInputDecoration.customInputDecoration("Şifre"),
-          cursorColor: Colors.black,
-          obscureText: true,
-        ),
+  Widget textFormFieldPassword() => TextFormField(
+        validator: (val) {
+          if (val!.isEmpty) {
+            return "Lütfen Alanları Doldurunuz";
+          } else {
+            return null;
+          }
+        },
+        onSaved: (val) {
+          password = val!.trim();
+        },
+        decoration: CustomInputDecoration.customInputDecoration("Şifre"),
+        cursorColor: Colors.black,
+        obscureText: true,
       );
-  Widget textFormFieldPasswordAgain() => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextFormField(
-          validator: (val) {
-            if (val!.isEmpty) {
-              return "Lütfen Alanları Doldurunuz";
-            } else {
-              return null;
-            }
-          },
-          onSaved: (val) {
-            passwordAgain = val!.trim();
-          },
-          decoration:
-              CustomInputDecoration.customInputDecoration("Şifre (Tekrar)"),
-          cursorColor: Colors.black,
-          obscureText: true,
-        ),
+  Widget textFormFieldPasswordAgain() => TextFormField(
+        validator: (val) {
+          if (val!.isEmpty) {
+            return "Lütfen Alanları Doldurunuz";
+          } else {
+            return null;
+          }
+        },
+        onSaved: (val) {
+          passwordAgain = val!.trim();
+        },
+        decoration:
+            CustomInputDecoration.customInputDecoration("Şifre (Tekrar)"),
+        cursorColor: Colors.black,
+        obscureText: true,
       );
-  CustomTextButton signUpButton() {
-    return CustomTextButton(
-      buttonText: "Kayıt Ol",
+  CustomElevatedButton signUpButton() {
+    return CustomElevatedButton(
+      buttonText: "Kayıt",
       onPressed: () async {
         if (formKey.currentState!.validate()) {
           formKey.currentState!.save();

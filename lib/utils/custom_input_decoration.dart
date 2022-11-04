@@ -15,7 +15,7 @@ class CustomInputDecoration {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: CustomColors.enabledColor),
+          borderSide: BorderSide(color: CustomColors.enabledColor, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

@@ -7,7 +7,9 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:like_button/like_button.dart';
 import 'package:pet_tinder/models/post_model.dart';
 import 'package:pet_tinder/pages/post_report_page.dart';
+import 'package:pet_tinder/service/firebase_methods.dart';
 import 'package:pet_tinder/user_auth/user_control.dart';
+import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
 import 'package:pet_tinder/widgets/custom_logo_container.dart';
@@ -21,39 +23,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var firebaseMethods = FirebaseMethods();
   late bool like;
   final postRef =
       FirebaseFirestore.instance.collection("Posts").orderBy("PostDate");
   final _firebaseFirestore = FirebaseFirestore.instance.collection("Posts");
-
   final fireaseAuth = FirebaseAuth.instance;
   final storage = FirebaseStorage.instance;
   var userEmail;
   var listUser;
   var img;
+  late User listenUser;
   //var resultimg = FirebaseStorage.instance.ref().child(_img).getDownloadURL();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User is signed in! ${user.email}');
-        userEmail = user.email;
-        listUser = user;
-      }
-    });
-    // getimg();
+    FirebaseAuth.instance.authStateChanges().listen(
+      (User? user) {
+        if (user == null) {
+          print('User is currently signed out!');
+        } else {
+          print('User is signed in! ${user.email}');
+          userEmail = user.email;
+          listUser = user;
+          listenUser = user;
+        }
+      },
+    );
   }
-
-  // getimg() async {
-  //   final _img = "profileImage/kenansezginbas@hotmail.com" + ".png";
-  //   img = await storage.ref().child(_img).getDownloadURL();
-  //   print("URL" + img);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -71,19 +70,21 @@ class _HomePageState extends State<HomePage> {
             return const Center(child: CircularProgressIndicator());
           }
           final data = snapshot.requireData;
+
           return ListView.builder(
             itemCount: data.size,
             itemBuilder: (context, index) {
-              print("data" + data.docs[index].reference.id.toString());
+              //   print("data" + data.docs[index].reference.id.toString());
               List likeList = data.docs[index]["Like"];
-              print(likeList);
-              // print("list ${likeList[index]}");
-              if (likeList.contains(userEmail)) {
-                print(likeList.contains(userEmail));
-                print("Like");
-              } else {
-                print("No Like");
-              }
+              // print(likeList);
+              // // print("list ${likeList[index]}");
+              // if (likeList.contains(userEmail)) {
+              //   print(likeList.contains(userEmail));
+              //   print("Like");
+              // } else {
+              //   print("No Like");
+              // }
+              print("id ?::::: " + data.docs[index].reference.id.toString());
               return postItem(
                 data.docs[index]["PostDesc"],
                 data.docs[index]["ImageURL"],
@@ -91,12 +92,13 @@ class _HomePageState extends State<HomePage> {
                   0,
                   data.docs[index]["User"].indexOf("@"),
                 ),
-                data.docs[index]["PostID"],
+                data.docs[index].reference.id.toString(),
                 data.docs[index].reference.id,
                 likeList.contains(userEmail) == true
                     ? Icon(Icons.favorite_rounded, color: Colors.red)
-                    : Icon(Icons.favorite_rounded, color: Colors.black),
+                    : Icon(Icons.favorite_border),
                 likeList.contains(userEmail),
+                likeList,
               );
             },
           );
@@ -106,7 +108,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget postItem(String postDesc, String imageURL, String user, String postID,
-          doc, Icon icon, bool isLiked) =>
+          doc, Icon icon, bool isLiked, List likes) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,25 +121,36 @@ class _HomePageState extends State<HomePage> {
                   height: 40,
                   width: 40,
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: CustomColors.turquoiseColor,
                       borderRadius: BorderRadius.circular(20)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: SizedBox.fromSize(
                       size: Size.fromRadius(48), // Image radius
                       child: img == null
-                          ? FlutterLogo()
+                          ? Center(
+                              child: Text(
+                                (user[0].toUpperCase()),
+                                style: CustomTextStyle.buttonBlackTextStyle,
+                              ),
+                            )
                           : Image(
-                              image: NetworkImage(FirebaseStorage.instance
-                                  .ref()
-                                  .child(
-                                      "profileImage/" + user + "@gmail.com.png")
-                                  .getDownloadURL()
-                                  .toString())),
+                              image: NetworkImage(
+                                FirebaseStorage.instance
+                                    .ref()
+                                    .child("profileImage/" +
+                                        user +
+                                        "@gmail.com.png")
+                                    .getDownloadURL()
+                                    .toString(),
+                              ),
+                            ),
                     ),
                   ),
                 ),
-                SizedBox(),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
                   user,
                   style: CustomTextStyle.postUserTextStyle,
@@ -154,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     },
-                    icon: Icon(Icons.report))
+                    icon: Icon(Icons.more_horiz))
               ],
             ),
           ),
@@ -171,32 +184,18 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(left: 10, bottom: 4),
             child: Row(
               children: [
-                LikeButton(
-                  circleColor: CircleColor(
-                      start: Color(0xff00ddff), end: Color(0xff0099cc)),
-                  bubblesColor: BubblesColor(
-                    dotPrimaryColor: Color(0xff33b5e5),
-                    dotSecondaryColor: Color(0xff0099cc),
-                  ),
-                  likeBuilder: (bool isLiked) {
-                    like = isLiked;
-                    print("Like Status : $isLiked");
-                    likeAction(doc, isLiked);
-                    return Icon(
-                      Icons.favorite,
-                      color: isLiked ? Colors.red : Colors.black,
-                    );
-                  },
-                  isLiked: isLiked,
-                  onTap: onLikeButtonTapped,
-                ),
                 IconButton(
-                    onPressed: () async {
-                      setState(() {
-                        likeAction(doc, isLiked);
-                      });
-                    },
-                    icon: icon),
+                  onPressed: () async {
+                    setState(() {
+                      firebaseMethods.likePost(
+                          user: listenUser,
+                          postId: postID,
+                          uid: listenUser.uid,
+                          likes: likes);
+                    });
+                  },
+                  icon: icon,
+                ),
                 IconButton(
                     onPressed: () {}, icon: Icon(CupertinoIcons.chat_bubble)),
                 Spacer(),
@@ -233,13 +232,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   likeAction(doc, bool isLiked) {
-    print("Like Action Calisti");
+    //print("Like Action Calisti");
     _firebaseFirestore.doc(doc).update({
       "Like": FieldValue.arrayUnion([userEmail])
     }).then((value) {
-      print("kjhgjsdkhgfdg");
+      //  print("kjhgjsdkhgfdg");
     });
-    print("Like Action Bitti");
+    //  print("Like Action Bitti");
 
     // if (isLiked == false) {
     //   _firebaseFirestore.doc(doc).update({
@@ -250,5 +249,26 @@ class _HomePageState extends State<HomePage> {
     //   //     "Like": FieldValue.delete([userEmail])
     //   //   });
     // }
+  }
+
+  Future<String> likePost(String postId, String uid, List likes) async {
+    String res = "Some error occurred";
+    try {
+      if (likes.contains(listenUser.email)) {
+        // if the likes list contains the user uid, we need to remove it
+        _firebaseFirestore.doc(postId).update({
+          'Like': FieldValue.arrayRemove([listenUser.email])
+        });
+      } else {
+        // else we need to add uid to the likes array
+        _firebaseFirestore.doc(postId).update({
+          'Like': FieldValue.arrayUnion([listenUser.email])
+        });
+      }
+      res = 'success';
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
   }
 }

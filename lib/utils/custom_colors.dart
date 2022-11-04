@@ -17,5 +17,5 @@ class CustomColors {
   static const titleTextStyleColor = Color(0xff24202A);
   static const subtitleTextStyleColor = Color(0xffACACAC);
   static const buttonWhiteTextStyleColor = Color(0xffFFFFFF);
-
+  static const customOrangeColor = Color(0xffFEDE69);
 }

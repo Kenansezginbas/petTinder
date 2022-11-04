@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet_tinder/pages/about_us.dart';
 import 'package:pet_tinder/pages/add_new_post.dart';
 import 'package:pet_tinder/pages/blog_page.dart';
+import 'package:pet_tinder/pages/contact_us.dart';
 import 'package:pet_tinder/pages/home_page.dart';
 import 'package:pet_tinder/pages/post_report_page.dart';
 import 'package:pet_tinder/pages/shopping_page.dart';
@@ -45,20 +47,21 @@ class MyApp extends StatelessWidget {
         "/loginPage": (context) => LoginPage(),
         "/signUp": (context) => SignUp(),
         "/forgotPassword": (context) => ForgotPasswordPage(),
-        "/addNewPost": (context) => AddNewPost(),
         "/userProfile": (context) => UserProfile(),
+        "/addNewPost": (context) => AddNewPost(),
         "/blogPage": (context) => BlogPage(),
         "/postReportPage": (context) => PostReportPage(),
         "/initialPage": (context) => InitialPage(),
+        "/aboutUS": (context) => AboutUS(),
+        "/contactUS": (context) => ContactUS(),
         "/widgetTest": (context) => WidgetTest()
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: CustomColors.scaffoldBackGroundColor,
         appBarTheme:
             AppBarTheme(backgroundColor: CustomColors.bottomNavBarColor),
       ),
-      home: MainPage(),
+      home: LoginPage(),
     );
   }
 }
