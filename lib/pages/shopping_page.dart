@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
+import 'package:pet_tinder/widgets/custom_app_bar.dart';
 import 'package:pet_tinder/widgets/shopping_container.dart';
 
 class ShoppingPage extends StatefulWidget {
@@ -17,18 +18,22 @@ class _ShoppingPageState extends State<ShoppingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: CustomAppBar(
+          title: "Alışveriş",
+          actions: [],
+        ),
         body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image(image: NetworkImage(ImageUrls.loginPageLogoUrl)),
-          Text(
-            "Çok Yakında :)",
-            style: CustomTextStyle.buttonBlackTextStyle,
-          )
-        ],
-      ),
-    ));
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(image: NetworkImage(ImageUrls.loginPageLogoUrl)),
+              Text(
+                "Çok Yakında :)",
+                style: CustomTextStyle.buttonBlackTextStyle,
+              )
+            ],
+          ),
+        ));
   }
 }
 

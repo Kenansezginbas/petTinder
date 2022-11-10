@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,12 +12,11 @@ import 'package:pet_tinder/pages/shopping_page.dart';
 import 'package:pet_tinder/user_auth/forgot_password_page.dart';
 import 'package:pet_tinder/user_auth/initial_page.dart';
 import 'package:pet_tinder/user_auth/login_page.dart';
-import 'package:pet_tinder/user_auth/main_page.dart';
+import 'package:pet_tinder/user_auth/landing_page.dart';
 import 'package:pet_tinder/user_auth/sign_up.dart';
 import 'package:pet_tinder/user_auth/user_profile.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/widget_test.dart';
-
 import 'firebase_options.dart';
 // Import the generated file
 
@@ -44,6 +42,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pet Tinder',
       routes: {
+        "/landingPage": (context) => LandingPage(),
         "/loginPage": (context) => LoginPage(),
         "/signUp": (context) => SignUp(),
         "/forgotPassword": (context) => ForgotPasswordPage(),
@@ -52,6 +51,7 @@ class MyApp extends StatelessWidget {
         "/blogPage": (context) => BlogPage(),
         "/postReportPage": (context) => PostReportPage(),
         "/initialPage": (context) => InitialPage(),
+        "/shoppingPage": (context) => ShoppingPage(),
         "/aboutUS": (context) => AboutUS(),
         "/contactUS": (context) => ContactUS(),
         "/widgetTest": (context) => WidgetTest()
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         appBarTheme:
             AppBarTheme(backgroundColor: CustomColors.bottomNavBarColor),
       ),
-      home: LoginPage(),
+      home: LandingPage(),
     );
   }
 }

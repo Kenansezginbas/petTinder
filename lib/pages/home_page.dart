@@ -3,16 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:like_button/like_button.dart';
-import 'package:pet_tinder/models/post_model.dart';
 import 'package:pet_tinder/pages/post_report_page.dart';
 import 'package:pet_tinder/service/firebase_methods.dart';
-import 'package:pet_tinder/user_auth/user_control.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
-import 'package:pet_tinder/widgets/custom_logo_container.dart';
 import 'package:pet_tinder/widgets/custom_post_container.dart';
 
 class HomePage extends StatefulWidget {

@@ -119,11 +119,11 @@ class _SignUpState extends State<SignUp> {
                   await firebaseAuth.createUserWithEmailAndPassword(
                       email: email, password: password);
               customSnackBar();
-              try {
-                var databaseResult = await databaseHelper
-                    .insert({"email": email, "password": password});
-                print("database result" + databaseResult.toString());
-              } catch (e) {}
+              // try {
+              //   var databaseResult = await databaseHelper
+              //       .insert({"email": email, "password": password});
+              //   print("database result" + databaseResult.toString());
+              // } catch (e) {}
               Navigator.pushNamed(context, "/widgetTest");
               //_userListenController.userEmail.value = email;
               //Get.toNamed("/userAdressPage");

@@ -99,7 +99,7 @@ class _UserProfileState extends State<UserProfile> {
         TextButton(
           onPressed: () async {
             var signOut = await fireaseAuth.signOut();
-            Navigator.pushNamed(context, "/initialPage");
+            Navigator.pushNamed(context, "/landingPage");
           },
           child: Text(
             "Logout",
