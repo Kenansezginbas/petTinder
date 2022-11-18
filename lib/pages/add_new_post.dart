@@ -1,22 +1,15 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pet_tinder/user_auth/user_control.dart';
-import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_input_decoration.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
 import 'package:pet_tinder/widgets/custom_elevated_button.dart';
-import 'package:pet_tinder/widgets/custom_text_button.dart';
 import 'package:pet_tinder/widgets/custom_app_bar.dart';
-import 'package:pet_tinder/widgets/custom_text_form_field.dart';
 import 'package:uuid/uuid.dart';
 
 class AddNewPost extends StatefulWidget {

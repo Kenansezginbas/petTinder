@@ -1,15 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_tinder/service/firebase_methods.dart';
-import 'package:pet_tinder/state_management/user_contoller.dart';
-import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_dialog.dart';
 import 'package:pet_tinder/utils/custom_input_decoration.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/widgets/custom_elevated_button.dart';
 import 'package:pet_tinder/widgets/custom_text_button.dart';
-import 'package:pet_tinder/widgets/custom_text_widget.dart';
-import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

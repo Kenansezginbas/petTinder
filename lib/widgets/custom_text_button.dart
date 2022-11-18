@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 
 class CustomTextButton extends StatelessWidget {
-  final buttonText;
+  final String buttonText;
   final GestureTapCallback onPressed;
   const CustomTextButton(
       {Key? key, required this.buttonText, required this.onPressed})

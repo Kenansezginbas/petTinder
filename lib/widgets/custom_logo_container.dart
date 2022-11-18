@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:pet_tinder/utils/custom_colors.dart';
 
 class CustomLogoContainer extends StatelessWidget {
   final String logoBckImage, logoCatImage;

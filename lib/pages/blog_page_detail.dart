@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pet_tinder/widgets/custom_app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';

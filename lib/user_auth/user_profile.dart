@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ import 'package:pet_tinder/state_management/user_contoller.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
-import 'package:pet_tinder/widgets/custom_text_widget.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});

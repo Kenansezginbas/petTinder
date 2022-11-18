@@ -2,22 +2,15 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pet_tinder/pages/blog_page.dart';
 import 'package:pet_tinder/pages/home_page.dart';
+import 'package:pet_tinder/pages/scr_page.dart';
 import 'package:pet_tinder/pages/shopping_page.dart';
 import 'package:pet_tinder/user_auth/user_profile.dart';
-import 'package:pet_tinder/utils/custom_texts.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
-import 'package:pet_tinder/utils/custom_text_styles.dart';
-import 'package:pet_tinder/utils/image_urls.dart';
 import 'package:pet_tinder/widgets/custom_app_bar.dart';
 import 'package:pet_tinder/widgets/custom_drawer.dart';
 import 'package:pet_tinder/widgets/custom_fab.dart';
-import 'package:pet_tinder/widgets/custom_logo_container.dart';
-import 'package:pet_tinder/widgets/custom_icon_button.dart';
-import 'package:pet_tinder/widgets/custom_text_button.dart';
-import 'package:pet_tinder/widgets/custom_text_widget.dart';
 
 class WidgetTest extends StatefulWidget {
   const WidgetTest({Key? key}) : super(key: key);
@@ -56,7 +49,7 @@ class _WidgetTestState extends State<WidgetTest> {
         children: [
           HomePage(),
           BlogPage(),
-          ShoppingPage(),
+          SCRPage(),
           UserProfile(),
         ],
       ),
@@ -87,7 +80,7 @@ class _WidgetTestState extends State<WidgetTest> {
       icons: [
         CupertinoIcons.home,
         CupertinoIcons.eyeglasses,
-        Icons.shopping_cart,
+        Icons.history_edu_rounded,
         CupertinoIcons.person
       ],
       activeIndex: _bottomNavIndex,

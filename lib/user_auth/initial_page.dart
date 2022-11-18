@@ -1,10 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pet_tinder/database/database_helper.dart';
-import 'package:pet_tinder/state_management/user_contoller.dart';
-import 'package:pet_tinder/utils/custom_dialog.dart';
 import 'package:pet_tinder/utils/custom_texts.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';

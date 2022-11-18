@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_tinder/service/firebase_methods.dart';
 import 'package:pet_tinder/utils/custom_input_decoration.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_tinder/utils/custom_input_decoration.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final hint, maxLines;
+  final dynamic hint, maxLines;
   String savedValue;
   CustomTextFormField(
       {super.key,

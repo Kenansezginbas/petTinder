@@ -7,7 +7,6 @@ import 'package:pet_tinder/utils/custom_input_decoration.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/widgets/custom_elevated_button.dart';
 import 'package:pet_tinder/widgets/custom_text_button.dart';
-import 'package:pet_tinder/widgets/custom_text_widget.dart';
 import 'package:get/get.dart';
 
 class SignUp extends StatefulWidget {

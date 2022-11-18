@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:pet_tinder/utils/custom_colors.dart';
 
 class CustomPostContainer extends StatelessWidget {
   final String logoBckImage, logoCatImage;
@@ -15,7 +12,7 @@ class CustomPostContainer extends StatelessWidget {
       child: Center(
         child: Container(
           height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context) .size.width,
+          width: MediaQuery.of(context).size.width,
           child: Image(
             image: NetworkImage(logoCatImage),
             loadingBuilder: customLoadingBuilder,

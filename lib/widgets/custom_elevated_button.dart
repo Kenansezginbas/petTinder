@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 
 class CustomElevatedButton extends StatelessWidget {
