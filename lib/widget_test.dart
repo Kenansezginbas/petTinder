@@ -11,6 +11,7 @@ import 'package:pet_tinder/utils/custom_texts.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/utils/image_urls.dart';
+import 'package:pet_tinder/widgets/custom_app_bar.dart';
 import 'package:pet_tinder/widgets/custom_drawer.dart';
 import 'package:pet_tinder/widgets/custom_fab.dart';
 import 'package:pet_tinder/widgets/custom_logo_container.dart';
@@ -29,7 +30,7 @@ class _WidgetTestState extends State<WidgetTest> {
   var _bottomNavIndex = 0;
   final PageController _pageController = PageController();
   var _firebaseAuth = FirebaseAuth.instance;
-  var appBarText = "Pet Tinder";
+  var appBarText = "Pet Takip";
   bool fabActive = true;
 
   @override
@@ -48,10 +49,7 @@ class _WidgetTestState extends State<WidgetTest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(appBarText, style: CustomTextStyle.appBarTextStyle),
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(title: appBarText, actions: []),
       drawer: CustomDrawer(),
       body: PageView(
         controller: _pageController,

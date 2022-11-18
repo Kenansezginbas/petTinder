@@ -69,17 +69,7 @@ class _HomePageState extends State<HomePage> {
           return ListView.builder(
             itemCount: data.size,
             itemBuilder: (context, index) {
-              //   print("data" + data.docs[index].reference.id.toString());
               List likeList = data.docs[index]["Like"];
-              // print(likeList);
-              // // print("list ${likeList[index]}");
-              // if (likeList.contains(userEmail)) {
-              //   print(likeList.contains(userEmail));
-              //   print("Like");
-              // } else {
-              //   print("No Like");
-              // }
-              print("id ?::::: " + data.docs[index].reference.id.toString());
               return postItem(
                 data.docs[index]["PostDesc"],
                 data.docs[index]["ImageURL"],

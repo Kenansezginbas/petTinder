@@ -58,8 +58,11 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        appBarTheme:
-            AppBarTheme(backgroundColor: CustomColors.bottomNavBarColor),
+        appBarTheme: AppBarTheme(
+            backgroundColor: CustomColors.bottomNavBarColor,
+            iconTheme: IconThemeData(
+              color: CustomColors.turquoiseColor,
+            )),
       ),
       home: LandingPage(),
     );

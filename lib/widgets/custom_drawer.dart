@@ -37,12 +37,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                 )),
           ),
-          CustomTextButton(
-              buttonText: "Alışveriş",
-              onPressed: () {
-                Navigator.pop(context);
-                Get.toNamed("/shoppingPage");
-              }),
+          // CustomTextButton(
+          //     buttonText: "Alışveriş",
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //       Get.toNamed("/shoppingPage");
+          //     }),
           CustomTextButton(
             buttonText: "Hakkımızda",
             onPressed: () => Get.toNamed("/aboutUS"),

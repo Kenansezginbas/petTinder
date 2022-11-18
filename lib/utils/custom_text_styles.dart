@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_tinder/utils/custom_colors.dart';
 
 class CustomTextStyle {
   static TextStyle titleTextStyle =
@@ -14,8 +15,21 @@ class CustomTextStyle {
       color: Colors.black, fontSize: 34, fontWeight: FontWeight.bold);
   static TextStyle buttonWhiteTextStyle =
       GoogleFonts.nunito(color: Colors.white, fontSize: 15);
-  static TextStyle appBarTextStyle =
-      GoogleFonts.nunito(color: Colors.white, fontSize: 18);
+  static TextStyle appBarTextStyle = GoogleFonts.nunito(
+    fontSize: 23,
+    fontWeight: FontWeight.bold,
+    foreground: Paint()
+      ..shader = LinearGradient(
+        colors: <Color>[
+          CustomColors.blackIconColor,
+          CustomColors.turquoiseColor,
+          CustomColors.customOrangeColor,
+          //add more color here.
+        ],
+      ).createShader(
+        Rect.fromLTWH(100.0, 500.0, 500.0, 500.0),
+      ),
+  );
   static TextStyle subtitleTextStyle =
       GoogleFonts.nunito(color: Colors.grey, fontSize: 16);
   static TextStyle postDescTextStyle =

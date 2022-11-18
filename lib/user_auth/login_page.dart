@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_tinder/service/firebase_methods.dart';
 import 'package:pet_tinder/state_management/user_contoller.dart';
 import 'package:pet_tinder/utils/custom_colors.dart';
+import 'package:pet_tinder/utils/custom_dialog.dart';
 import 'package:pet_tinder/utils/custom_input_decoration.dart';
 import 'package:pet_tinder/utils/custom_text_styles.dart';
 import 'package:pet_tinder/widgets/custom_elevated_button.dart';
@@ -20,8 +22,8 @@ class _LoginPageState extends State<LoginPage> {
   var email, password;
   final formKey = GlobalKey<FormState>();
   var title = "Giriş Yap";
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final UserController userController = Get.put(UserController());
+  final customDialog = CustomDialog();
+  final firebaseMethods = FirebaseMethods();
 
   @override
   void initState() {
@@ -120,23 +122,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   firebaseLogin() async {
-    try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      userController.user.value = email;
-      debugPrint("Giriş Başarılı");
-      debugPrint(userController.user.value);
-      //_userListenController.userEmail.value = email;
-      Get.offNamed("/widgetTest");
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        customShowDialog("Kullanıcı Bulunamadı");
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-        customShowDialog("Hatalı Mail veya Şifre Bilgisi");
-      }
-    }
+    customDialog.showProgress(context);
+    firebaseMethods.signIn(context, email, password);
   }
 
   Future customShowDialog(String errorMessage) {

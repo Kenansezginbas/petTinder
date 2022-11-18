@@ -18,22 +18,18 @@ class _ShoppingPageState extends State<ShoppingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(
-          title: "Alışveriş",
-          actions: [],
-        ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image(image: NetworkImage(ImageUrls.loginPageLogoUrl)),
-              Text(
-                "Çok Yakında :)",
-                style: CustomTextStyle.buttonBlackTextStyle,
-              )
-            ],
-          ),
-        ));
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(image: NetworkImage(ImageUrls.loginPageLogoUrl)),
+          Text(
+            "Çok Yakında :)",
+            style: CustomTextStyle.buttonBlackTextStyle,
+          )
+        ],
+      ),
+    ));
   }
 }
 

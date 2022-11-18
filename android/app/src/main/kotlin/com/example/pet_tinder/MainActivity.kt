@@ -1,4 +1,4 @@
-package com.example.pet_tinder
+package com.petTinder.live
 
 import io.flutter.embedding.android.FlutterActivity
 
