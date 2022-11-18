@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">767976103345-5r119n9a2guijjmb8mt5qifekltvfdr9.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">767976103345</string>
+    <string name="google_api_key" translatable="false">AIzaSyB_30KKkiDaOdNbHGy0qhXCgZlSXhnXUb4</string>
+    <string name="google_app_id" translatable="false">1:767976103345:android:5d0cc3635837cc0d52b190</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB_30KKkiDaOdNbHGy0qhXCgZlSXhnXUb4</string>
+    <string name="google_storage_bucket" translatable="false">pettinder-fcfaa.appspot.com</string>
+    <string name="project_id" translatable="false">pettinder-fcfaa</string>
+</resources>

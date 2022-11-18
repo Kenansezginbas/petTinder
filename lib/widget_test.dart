@@ -27,8 +27,8 @@ class WidgetTest extends StatefulWidget {
 
 class _WidgetTestState extends State<WidgetTest> {
   var _bottomNavIndex = 0;
-  var _firebaseAuth = FirebaseAuth.instance;
   final PageController _pageController = PageController();
+  var _firebaseAuth = FirebaseAuth.instance;
   var appBarText = "Pet Tinder";
   bool fabActive = true;
 

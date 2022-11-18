@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:767976103345:android:5d0cc3635837cc0d52b190",
         "android_client_info": {
-          "package_name": "com.example.pet_tinder"
+          "package_name": "com.petTinder.live"
         }
       },
       "oauth_client": [
